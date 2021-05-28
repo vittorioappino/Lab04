@@ -8,7 +8,7 @@ public class Model {
 	
 	public List<Corso> corsi = null;
 
-	public List<Corso> getCorsi() {
+	public List<Corso> getTuttiICorsi() {
 		if(this.corsi==null) {
 			CorsoDAO dao = new CorsoDAO();
 			this.corsi = dao.getTuttiICorsi();

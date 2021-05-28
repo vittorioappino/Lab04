@@ -3,6 +3,7 @@ package it.polito.tdp.lab04;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -18,7 +19,7 @@ import javafx.scene.control.TextField;
 public class FXMLController {
 	
 	private Model model;
-	private List<Corso> corsi = new ArrayList();
+	private List<Corso> corsi = new LinkedList();
 
     @FXML
     private ResourceBundle resources;
@@ -99,7 +100,7 @@ public class FXMLController {
 	public void setModel(Model model) {
 		this.model=model;
 		txtResult.setStyle("-fx-font-family: monospace");
-		corsi = model.getCorsi();
+		corsi = model.getTuttiICorsi();
 		Collections.sort(corsi);
 		comboCorso.getItems().addAll(corsi);
 	}
