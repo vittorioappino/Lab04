@@ -39,4 +39,8 @@ public class Model {
 		return StudenteDao.isStudenteIscrittoACorso(studente, corso);
 	}
 
+	public boolean inscriviStudenteACorso(Studente studente, Corso corso) {
+		return CorsoDao.inscriviStudenteACorso(studente, corso);
+	}
+
 }
