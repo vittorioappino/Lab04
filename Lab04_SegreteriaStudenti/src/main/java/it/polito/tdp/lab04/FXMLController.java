@@ -1,7 +1,12 @@
 package it.polito.tdp.lab04;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import it.polito.tdp.lab04.model.Corso;
+import it.polito.tdp.lab04.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +15,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class FXMLController {
+	
+	private Model model;
+	private List<Corso> corsi = new ArrayList();
 
     @FXML
     private ResourceBundle resources;
@@ -18,7 +26,7 @@ public class FXMLController {
     private URL location;
 
     @FXML
-    private ComboBox<?> comboCorso;
+    private ComboBox<Corso> comboCorso;
 
     @FXML
     private Button btnCercaIscrittiCorso;
@@ -86,4 +94,12 @@ public class FXMLController {
         assert btnReset != null : "fx:id=\"btnReset\" was not injected: check your FXML file 'Scene.fxml'.";
 
     }
+
+	public void setModel(Model model) {
+		this.model=model;
+		txtResult.setStyle("-fx-font-family: monospace");
+		comboCorso.setStyle("-fx-font-family: monospace");
+		corsi = model.getCorsi();
+		comboCorso.getItems().addAll(corsi);
+	}
 }
