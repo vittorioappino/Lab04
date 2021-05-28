@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 
 import it.polito.tdp.lab04.model.Corso;
 import it.polito.tdp.lab04.model.Model;
+import it.polito.tdp.lab04.model.Studente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,8 +19,9 @@ import javafx.scene.control.TextField;
 
 public class FXMLController {
 	
-	private Model model;
-	private List<Corso> corsi = new LinkedList();
+	private Model Model;
+	private List<Corso> corsi;
+	private Studente studente;
 
     @FXML
     private ResourceBundle resources;
@@ -69,7 +71,13 @@ public class FXMLController {
 
     @FXML
     void doCercaNome(ActionEvent event) {
-
+    	int matricola;
+    	String nominativo = txtMatricola.getText();
+    	matricola = Integer.parseInt(nominativo);
+    	
+		studente = Model.esisiteStudente(matricola);
+		txtNome.setText(studente.getNome());
+		txtCognome.setText(studente.getCognome());
     }
 
     @FXML
@@ -98,10 +106,9 @@ public class FXMLController {
     }
 
 	public void setModel(Model model) {
-		this.model=model;
+		this.Model=model;
 		txtResult.setStyle("-fx-font-family: monospace");
-		corsi = model.getTuttiICorsi();
-		Collections.sort(corsi);
+		corsi = Model.getTuttiICorsi();
 		comboCorso.getItems().addAll(corsi);
 	}
 }
