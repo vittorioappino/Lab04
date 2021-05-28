@@ -34,8 +34,7 @@ public class StudenteDAO {
 				rs.close();
 				st.close();
 				conn.close();
-				studente = new Studente(null, null, null, matricola);
-				return studente;
+				return null;
 			}
 			
 		}catch (SQLException e) {

@@ -27,4 +27,8 @@ public class Model {
 		return StudenteDao.esisteStudente(matricola);
 	}
 
+	public List<Studente> getStudentiByCorso(Corso corso) {
+		return CorsoDao.getStudentiByCorso(corso);
+	}
+
 }

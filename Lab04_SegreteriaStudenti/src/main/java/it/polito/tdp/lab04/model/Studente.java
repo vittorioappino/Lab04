@@ -72,6 +72,10 @@ public class Studente {
 		return true;
 	}
 	
+	@Override
+	public String toString() {
+		return String.format("%-8s %-20s %-20s %-8s", matricola, nome, cognome, CDS);
+	}
 	
 	
 
