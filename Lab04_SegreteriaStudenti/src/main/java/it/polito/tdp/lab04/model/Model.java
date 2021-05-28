@@ -31,4 +31,8 @@ public class Model {
 		return CorsoDao.getStudentiByCorso(corso);
 	}
 
+	public List<Corso> getCorsiByStudente(Studente studente) {
+		return StudenteDao.getCorsiByStudente(studente);
+	}
+
 }

@@ -61,11 +61,49 @@ public class FXMLController {
 
     @FXML
     void doCercaCorsi(ActionEvent event) {
+    	txtResult.clear();
+		txtNome.clear();
+		txtCognome.clear();
+
+		try {
+
+			int matricola = Integer.parseInt(txtMatricola.getText());
+			Studente studente = Model.esisiteStudente(matricola);
+
+			if (studente == null) {
+				txtResult.appendText("Nessun risultato: matricola inesistente");
+				return;
+			}
+ 
+			List<Corso> corsi = Model.getCorsiByStudente(studente);
+			
+			if(corsi.size() == 0) {
+	    		txtResult.appendText("Lo studente non è isccritto ad alcun corso");
+	    		return;
+	    	}
+			
+			StringBuilder sb = new StringBuilder();
+	    	for(Corso c : corsi) {
+	    		sb.append(String.format("%-8s ", c.getCodins()));
+	    		sb.append(String.format("%-4d ", c.getNumeroCrediti()));
+	    		sb.append(String.format("%-50s ", c.getNome()));
+	    		sb.append(String.format("%-4d\n", c.getPeriodoDidattico()));
+	    	}
+	    	
+	    	txtResult.appendText(sb.toString());
+
+		} catch (NumberFormatException e) {
+			txtResult.setText("Inserire una matricola nel formato corretto.");
+		} catch (RuntimeException e) {
+			txtResult.setText("ERRORE DI CONNESSIONE AL DATABASE!");
+		}
+
 
     }
 
     @FXML
     void doCercaIscrittiCorso(ActionEvent event) {
+    	txtResult.clear();
     	
     	Corso corso = comboCorso.getValue();
     	

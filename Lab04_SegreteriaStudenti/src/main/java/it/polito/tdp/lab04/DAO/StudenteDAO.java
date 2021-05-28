@@ -42,4 +42,30 @@ public class StudenteDAO {
 		}
 	}
 
+	public List<Corso> getCorsiByStudente(Studente studente) {
+		String sql = "SELECT * "
+				+ "FROM corso c, iscrizione i "
+				+ "WHERE c.codins = i.codins "
+				+ "AND i.matricola = ?";
+		List<Corso> result = new LinkedList<Corso>();
+		try {
+			Connection conn = ConnectDB.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setInt(1, studente.getMatricola());
+			ResultSet rs = st.executeQuery();
+			while(rs.next()) {
+				Corso c= new Corso(rs.getString("codins"), 
+						rs.getInt("crediti"), rs.getString("nome"), rs.getInt("pd"));
+				result.add(c);
+			}
+			
+			rs.close();
+			st.close();
+			conn.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return result;
+	}
+
 }
