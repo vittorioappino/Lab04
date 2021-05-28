@@ -104,8 +104,13 @@ public class FXMLController {
     @FXML
     void doCercaIscrittiCorso(ActionEvent event) {
     	txtResult.clear();
+    try {
     	
     	Corso corso = comboCorso.getValue();
+    	if(corso==null) {
+    		txtResult.setText("Selezionare un corso");
+    		return;
+    	}
     	
     	List<Studente> studenti = Model.getStudentiByCorso(corso);
     	
@@ -119,7 +124,9 @@ public class FXMLController {
     	for(Studente s : studenti) {
     		txtResult.appendText(s + "\n");
     	}
-
+    }catch(RuntimeException e) {
+    	txtResult.setText("ERRORE DI CONNESSIONE AL DATABASE!");
+    }
     }
 
     @FXML
@@ -209,7 +216,11 @@ public class FXMLController {
 
     @FXML
     void doReset(ActionEvent event) {
-
+    	txtMatricola.clear();
+    	txtNome.clear();
+    	txtCognome.clear();
+    	txtResult.clear();
+    	comboCorso.getSelectionModel().clearSelection();
     }
 
     @FXML
