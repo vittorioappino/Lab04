@@ -68,4 +68,9 @@ public class StudenteDAO {
 		return result;
 	}
 
+	public boolean isStudenteIscrittoACorso(Studente studente, Corso corso) {
+		
+		return false;
+	}
+
 }

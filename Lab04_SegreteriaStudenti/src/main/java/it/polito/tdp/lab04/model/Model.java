@@ -35,4 +35,8 @@ public class Model {
 		return StudenteDao.getCorsiByStudente(studente);
 	}
 
+	public boolean isStudenteIscrittoACorso(Studente studente, Corso corso) {
+		return StudenteDao.isStudenteIscrittoACorso(studente, corso);
+	}
+
 }

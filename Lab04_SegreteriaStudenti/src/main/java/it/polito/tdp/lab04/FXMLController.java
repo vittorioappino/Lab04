@@ -151,7 +151,60 @@ public class FXMLController {
 
     @FXML
     void doIscrivi(ActionEvent event) {
+    	txtResult.clear();
 
+		try {
+
+			if (txtMatricola.getText().isEmpty()) {
+				txtResult.setText("Inserire una matricola.");
+				return;
+			}
+
+			if (comboCorso.getValue() == null) {
+				txtResult.setText("Selezionare un corso.");
+				return;
+			}
+
+			int matricola = Integer.parseInt(txtMatricola.getText());
+
+			Studente studente = Model.esisiteStudente(matricola);
+			if (studente == null) {
+				txtResult.appendText("Nessun risultato: matricola inesistente");
+				return;
+			}
+
+			txtNome.setText(studente.getNome());
+			txtCognome.setText(studente.getCognome());
+
+			Corso corso = comboCorso.getValue();
+
+			if (Model.isStudenteIscrittoACorso(studente, corso)) {
+				txtResult.appendText("Studente già iscritto a questo corso");
+				return;
+			}
+			// Prima di passare a rendere il tasto 'Iscrivi' realmente operativo 
+			// con l'iscrizione, la versione 'Cerca' avrebbe fatto solo il successivo else.
+			//}else {
+			//	txtResult.appendText("Studente non iscritto a questo corso");
+			//	return;
+			//}
+
+			///*
+			// Iscrivo lo studente al corso.
+			// Controllo che l'inserimento vada a buon fine
+			if (!Model.inscriviStudenteACorso(studente, corso)) {
+				txtResult.appendText("Errore durante l'iscrizione al corso");
+				return;
+			} else {
+				txtResult.appendText("Studente iscritto al corso!");
+			}
+
+		} catch (NumberFormatException e) {
+			txtResult.setText("Inserire una matricola nel formato corretto.");
+		} catch (RuntimeException e) {
+			txtResult.setText("ERRORE DI CONNESSIONE AL DATABASE!");
+		}
+    	
     }
 
     @FXML
