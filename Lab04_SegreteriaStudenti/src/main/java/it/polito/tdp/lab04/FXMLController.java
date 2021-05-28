@@ -2,6 +2,7 @@ package it.polito.tdp.lab04;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -98,8 +99,8 @@ public class FXMLController {
 	public void setModel(Model model) {
 		this.model=model;
 		txtResult.setStyle("-fx-font-family: monospace");
-		comboCorso.setStyle("-fx-font-family: monospace");
 		corsi = model.getCorsi();
+		Collections.sort(corsi);
 		comboCorso.getItems().addAll(corsi);
 	}
 }
